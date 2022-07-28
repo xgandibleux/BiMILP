@@ -117,7 +117,7 @@ function createProblemMILP(nZ::Int64, nR::Int64, nK::Int64,
     else
         @objective(model, Max, sum(c2Z[i]*xZ[i] for i in 1:nZ) + sum(c2R[i]*xR[i] for i in 1:nR))
     end
-    @constraint(model, [i=1:nK], sum((A[i,j]*xZ[j]) for j in 1:nZ) + sum((A[i,nR-1+j]*xR[j]) for j in 1:nR) ≤ d[i])
+    @constraint(model, [i=1:nK], sum((A[i,j]*xZ[j]) for j in 1:nZ) + sum((A[i,nZ+j]*xR[j]) for j in 1:nR) ≤ d[i])
     return model, xZ, xR
 end
 
